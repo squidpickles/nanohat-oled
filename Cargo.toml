@@ -1,0 +1,8 @@
+[package]
+name = "nanohat-oled"
+version = "0.1.0"
+authors = ["Kevin Rauwolf <sweetpea-git@tentacle.net>"]
+edition = "2018"
+
+[dependencies]
+i2c-linux = "*"
