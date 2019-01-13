@@ -27,15 +27,9 @@ const EMPTY_SCREEN: [u8; (OLED_WIDTH * OLED_HEIGHT) as usize] =
 /// Returned for commands and data sent to the OLED display.
 pub type OledResult = Result<()>;
 
-/// Represents a bitmapped image
-pub struct Image<'a> {
-    /// The width of the image, in pixels
-    pub width: u16,
-    /// The height of the image, in pixels
-    pub height: u16,
-    /// The image data, as a bitmap
-    pub data: &'a [u8],
-}
+/// For now, images are represented as byte arrays representing 8-bit grayscale bitmaps.
+/// Note that images must be exactly the size of the display
+pub type Image = [u8];
 
 /// Different addressing modes available for the display.
 /// They affect how pointers are advanced after data is written.
@@ -204,14 +198,14 @@ impl Oled {
     /// be interpreted as a `1` pixel; anything under will be
     /// interpreted as a `0`.
     pub fn draw_image(&mut self, image: &Image, threshold: u8) -> OledResult {
-        if image.width != OLED_WIDTH || image.height != OLED_HEIGHT {
+        if image.len() != (OLED_HEIGHT * OLED_WIDTH) as usize {
             return Err(Error::new(
                 ErrorKind::InvalidData,
                 format!("Image dimensions must be {}x{}", OLED_WIDTH, OLED_HEIGHT),
             ));
         }
         let mut write_page = [0u8; (OLED_WIDTH * OLED_HEIGHT / OLED_PAGE_HEIGHT) as usize];
-        for (page, page_data) in image.data[0..(OLED_WIDTH * OLED_HEIGHT) as usize]
+        for (page, page_data) in image
             .chunks((OLED_WIDTH * OLED_PAGE_HEIGHT) as usize)
             .enumerate()
         {
