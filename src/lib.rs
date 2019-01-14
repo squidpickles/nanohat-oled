@@ -113,7 +113,7 @@ impl Oled {
         Ok(Self { device: i2c })
     }
 
-    /// Initial low-level setup for the display
+    /// Initial low-level setup for the display, per SSD1306 and NanoHat OLED datasheets.
     pub fn init(&mut self) -> OledResult {
         self.send_command(Command::DisplayOff)?;
         self.send_command(0x00)?; // Set lower column address

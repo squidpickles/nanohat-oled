@@ -1,6 +1,6 @@
 # nanohat-oled
 
-This is a Rust port of the manufacturer code for the NanoHat OLED.
+This is a Rust port of the manufacturer code for the NanoHat OLED, based on the SSD1306 OLED display from Solomon Systech.
 
 It enables basic access to the screen functions, including a facility for displaying text and images.
 
