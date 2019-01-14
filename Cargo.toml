@@ -11,7 +11,7 @@ repository = "https://github.com/squidpickles/nanohat-oled.git"
 edition = "2018"
 
 [dependencies]
-i2c-linux = "*"
+i2c-linux = "0.1"
 
 [badges]
 travis-ci = { repository = "squidpickles/nanohat-oled", branch = "master" }
