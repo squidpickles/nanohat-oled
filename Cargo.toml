@@ -2,7 +2,16 @@
 name = "nanohat-oled"
 version = "0.1.0"
 authors = ["Kevin Rauwolf <sweetpea-git@tentacle.net>"]
+description = "Library to work with the NanoHat OLED display"
+homepage = "https://github.com/squidpickles/nanohat-oled"
+readme = "README.md"
+keywords = ["nanohat", "oled", "ssd1306"]
+license = "Apache-2.0"
+repository = "https://github.com/squidpickles/nanohat-oled.git"
 edition = "2018"
 
 [dependencies]
 i2c-linux = "*"
+
+[badges]
+travis-ci = { repository = "squidpickles/nanohat-oled", branch = "master" }
