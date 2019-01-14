@@ -5,8 +5,8 @@ use std::fs::File;
 use std::io::{Error, ErrorKind, Result};
 use std::path::Path;
 
-mod fonts;
-use crate::fonts::{BasicFont, Font};
+mod font;
+use crate::font::BasicFont;
 
 /// The width of the display, in pixels
 pub const OLED_WIDTH: u16 = 128;
@@ -141,6 +141,7 @@ impl Oled {
         self.send_command(0x14)?; // charge pump enabled
         self.send_command(Command::DisplayOn)?;
         self.set_addressing_mode(AddressingMode::Horizontal)?;
+        self.clear_display()?;
         Ok(())
     }
 
@@ -231,17 +232,12 @@ impl Oled {
     /// Writes a single character to the display at the current
     /// X,Y location (as set by [`set_text_xy()`](struct.Oled.html#method.set_text_xy)
     /// and incremented by the [`AddressingMode`](enum.AddressingMode.html)).
-    /// Note: only printable ASCII is supported
+    /// Note: only printable ASCII is supported. Other characters will output as
+    /// an empty square.
     pub fn put_char(&mut self, char: char) -> OledResult {
-        if let Some(bitmap) = BasicFont::bitmap(char) {
-            self.send_array_data(&bitmap[..])?;
-            Ok(())
-        } else {
-            Err(Error::new(
-                ErrorKind::InvalidData,
-                format!("No bitmap for {}", char),
-            ))
-        }
+        let bitmap = BasicFont::bitmap(char);
+        self.send_array_data(&bitmap[..])?;
+        Ok(())
     }
 
     /// Writes a string to the display, starting at the current
@@ -262,13 +258,5 @@ impl Oled {
         self.send_command(Command::SetAddressingMode)?;
         self.send_command(mode)?;
         Ok(())
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
     }
 }

@@ -4,8 +4,7 @@ use std::io::Result;
 fn run() -> Result<()> {
     let mut oled = Oled::from_path("/dev/i2c-0")?;
     oled.init()?;
-    oled.clear_display()?;
-    oled.put_string("Hello, world")?;
+    oled.put_string("Hello, world!")?;
     Ok(())
 }
 
