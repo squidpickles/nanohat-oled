@@ -213,13 +213,6 @@ impl Oled {
             for (row, row_data) in page_data.chunks(OLED_WIDTH as usize).enumerate() {
                 for (column, pixel) in row_data.iter().enumerate() {
                     let pixel = if *pixel >= threshold { 1 } else { 0 };
-                    println!(
-                        "page: {}, row: {}, column: {}, write offset: {}",
-                        page,
-                        row,
-                        column,
-                        (page * OLED_WIDTH as usize) + column
-                    );
                     write_page[(page * OLED_WIDTH as usize) + column] |= pixel << row;
                 }
             }
