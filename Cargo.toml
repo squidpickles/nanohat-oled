@@ -12,6 +12,7 @@ edition = "2018"
 
 [dependencies]
 i2c-linux = "0.1"
+log = "0.4"
 
 [badges]
 travis-ci = { repository = "squidpickles/nanohat-oled", branch = "master" }

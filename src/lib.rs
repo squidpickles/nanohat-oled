@@ -1,6 +1,7 @@
 //! An interface for the NanoHat OLED module
 #![warn(missing_docs)]
 use i2c_linux::I2c;
+use log::*;
 use std::fs::File;
 use std::io::{Error, ErrorKind, Result};
 use std::path::Path;
@@ -213,7 +214,7 @@ impl Oled {
             for (row, row_data) in page_data.chunks(OLED_WIDTH as usize).enumerate() {
                 for (column, pixel) in row_data.iter().enumerate() {
                     let pixel = if *pixel >= threshold { 1 } else { 0 };
-                    println!(
+                    debug!(
                         "page: {}, row: {}, column: {}, write offset: {}",
                         page,
                         row,
