@@ -1,4 +1,4 @@
-//! An interface for the NanoHat OLED module
+#![doc = include_str!("../README.md")]
 #![warn(missing_docs)]
 use i2c_linux::I2c;
 use log::*;
