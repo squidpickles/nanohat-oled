@@ -49,9 +49,9 @@ pub enum AddressingMode {
     Page,
 }
 
-impl Into<u8> for AddressingMode {
-    fn into(self) -> u8 {
-        match self {
+impl From<AddressingMode> for u8 {
+    fn from(mode: AddressingMode) -> u8 {
+        match mode {
             AddressingMode::Horizontal => 0x00,
             AddressingMode::Vertical => 0x01,
             AddressingMode::Page => 0x02,
@@ -80,9 +80,9 @@ pub enum Command {
     InverseDisplay,
 }
 
-impl Into<u8> for Command {
-    fn into(self) -> u8 {
-        match self {
+impl From<Command> for u8 {
+    fn from(command: Command) -> u8 {
+        match command {
             Command::ContentFollowsRam => 0xa4,
             Command::EntireDisplayOn => 0xa5,
             Command::SetAddressingMode => 0x20,
