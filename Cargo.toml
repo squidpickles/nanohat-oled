@@ -1,6 +1,6 @@
 [package]
 name = "nanohat-oled"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Kevin Rauwolf <sweetpea-git@tentacle.net>"]
 description = "Library to work with the NanoHat OLED display"
 homepage = "https://github.com/squidpickles/nanohat-oled"
